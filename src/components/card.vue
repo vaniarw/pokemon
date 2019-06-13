@@ -4,6 +4,7 @@
         <img class="card-img-top" v-bind:src="pokemon.sprites['front_default']" alt="None">
         <!-- <img class="card-img-top" v-bind:src="pokemon.sprites.font_default" alt="None"> -->
         <div class="card-body">
+            <h1>{{url}}</h1>
             <h5 class="card-title">{{ pokemon.name }}</h5>
             <p class="card-text"> Height: {{ pokemon.height }} inches 
             <br> Weight: {{ pokemon.weight }} pounds</p>
@@ -20,11 +21,11 @@ export default {
   data: function ()
       {
           return {
-              pokemon: null
+              pokemon: ""
           }
       },
   props: {
-    msg: String
+    url: String
   },
   mounted: function() {
       console.log("mounted function ran")
@@ -34,11 +35,11 @@ export default {
 
       axios({
             method: 'get',
-            url: 'https://pokeapi.co/api/v2/pokemon/pikachu',
+            url: vm.url,
             responseType: 'stream'
         })
             .then(function (response) {
-                console.log(response);
+                // console.log(response);
                 vm.pokemon = response.data
                 });
     }
