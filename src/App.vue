@@ -1,59 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Hello World!"/>
-    <card :url="item.pokemon.url" v-for="item in pokemonOfRockType" :key="item.pokemon.name"></card>
-
-    <div v-for="item in pokemonOfRockType" :key="item.pokemon.name">
-      {{ item.pokemon.name }} <br>
-      {{ item.pokemon.url }}<br><br>
+    <div class="container">
+      <h1 class="text-center display-1 m-5">Rock Type Pokemon</h1>
+      <div class="row">
+        <card :url="item.pokemon.url" v-for="item in pokemonOfRockType" :key="item.pokemon.name"></card>
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import card from './components/card.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import card from "./components/card.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     HelloWorld,
     card
   },
-  data: function ()
-      {
-          return {
-              pokemonOfRockType: ""
-          }
-      },
-      mounted: function() {
-        console.log("mounted function ran")
+  data: function() {
+    return {
+      pokemonOfRockType: ""
+    };
+  },
+  mounted: function() {
+    console.log("mounted function ran");
 
-        const axios = require('axios');
-        const vm = this;
+    const axios = require("axios");
+    const vm = this;
 
-        axios({
-            method: 'get',
-            url: 'https://pokeapi.co/api/v2/type/rock',
-            responseType: 'stream'
-        })
-            .then(function (response) {
-                // console.log(response.data.pokemon);
-                vm.pokemonOfRockType = response.data.pokemon
-                });
-    }
-}
+    axios({
+      method: "get",
+      url: "https://pokeapi.co/api/v2/type/rock",
+      responseType: "stream"
+    }).then(function(response) {
+      // console.log(response.data.pokemon);
+      vm.pokemonOfRockType = response.data.pokemon;
+    });
+  }
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
